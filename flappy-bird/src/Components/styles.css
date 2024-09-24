@@ -1,0 +1,81 @@
+.background {
+  position: fixed; /* Фон фиксирован на месте */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Занимаем всю ширину экрана */
+  height: 100vh; /* Занимаем всю высоту экрана */
+  overflow: hidden; /* Скрываем лишнее содержимое */
+}
+
+.background-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%; /* Делаем шире для эффекта бесконечности */
+  height: 100%;
+  background-image: url('./background.png'); /* Путь к изображению */
+  background-repeat: repeat; /* Повторяем изображение по обеим осям */
+  background-size: contain; /* Используем contain для полного отображения изображения */
+}
+
+@keyframes rotateBackground {
+  from {
+    transform: translateX(0); /* Начальная позиция */
+  }
+  to {
+    transform: translateX(-50%); /* Перемещаем влево на половину ширины */
+  }
+}
+
+.background-layer-1 {
+  animation: rotateBackground 13s linear infinite; /* Анимация для первого слоя */
+}
+
+.background-layer-2 {
+  animation: rotateBackground 13s linear infinite; /* Анимация для второго слоя */
+  left: 100%; /* Сдвигаем второй слой вправо для создания эффекта бесконечности */
+}
+
+.player {
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}
+
+.bird {
+  width: 45px;
+}
+
+@keyframes movePipes {
+  0% {
+    transform: translateX(700px); /* Начинаем справа за пределами экрана */
+  }
+  100% {
+    transform: translateX(-70px); /* Перемещаем трубы влево на ширину трубы */
+  }
+}
+
+.pipe-container {
+  overflow-y: visible;
+  position: absolute; /* Позиционируем трубы абсолютно */
+  animation: movePipes linear infinite; /* Применяем анимацию */
+  animation-duration: 2.8s; /* Длительность анимации, можно настроить */
+}
+
+.pipe-collider {
+  position: relative; /* Позволяет позиционировать дочерние элементы */
+}
+
+.pipe1, .pipe2 {
+  width: 100%; /* Занять всю ширину контейнера */
+  height: 100%; /* Занять всю высоту контейнера */
+}
+
+.clickable-div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Занимает всю ширину родительского элемента */
+  height: 100vh; /* Занимает всю высоту родительского элемента */
+  z-index: 3;
+}
