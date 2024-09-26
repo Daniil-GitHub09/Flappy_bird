@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from 'react';
 import Bird from './Bird';
 import './styles.css';
 import Pipe from './Pipe';
+import Counter from './Counter';
+import Death from './Death';
 
 function Game() {
   const [isFalling, setIsFalling] = useState(true);
@@ -12,11 +14,15 @@ function Game() {
   const [pipePositionTwice, setPipePositionTwice] = useState(0)
   const [pipePositionThird, setPipePositionThird] = useState(0)
   const [gameOver, setGameOver] = useState(false);
+  const [point, setPoint] = useState(0)
 
   const ref = useRef([]); // Создаем реф для элемента
   const refTwice = useRef([]); // Создаем реф для элемента
   const refThird = useRef([]); // Создаем реф для элемента
   const birdRef = useRef()
+
+    // Track passing status for each pipe
+  const hasPassedPipe = useRef([false, false, false]); // Array for three pipes
   
 
   const checkIfOutOfViewf = () => {
@@ -30,6 +36,30 @@ function Game() {
       }
   };
 
+ // Check if the bird has passed a pipe
+ const getPoint = () => {
+  if (birdRef.current) {
+    const birdRect = birdRef.current.getBoundingClientRect();
+    const pipeRefs = [ref.current[3], refTwice.current[3], refThird.current[3]];
+
+    pipeRefs.forEach((pipe, index) => {
+      if (pipe) {
+        const pipeRect = pipe.getBoundingClientRect();
+
+        // Check if the bird has passed the pipe
+        if (birdRect.x > pipeRect.x + pipeRect.width && !hasPassedPipe.current[index]) {
+          setPoint((prev) => prev + 1); // Increment score
+          hasPassedPipe.current[index] = true; // Mark this pipe as passed
+        }
+
+        // Reset passing status when pipes go off-screen
+        if (pipeRect.left < -50) {
+          hasPassedPipe.current[index] = false; // Reset for next pass
+        }
+      }
+    });
+  }
+};
     // Проверка столкновения между птицей и трубами
     const checkCollision = () => {
       if (birdRef.current) {
@@ -85,6 +115,7 @@ function Game() {
       checkIfOutOfViewTwice()
       checkIfOutOfViewThird()
       checkCollision()
+      getPoint()
     }, 120)
 
     return () => clearInterval(intervalId);
@@ -137,7 +168,7 @@ function Game() {
   const handleBackgroundClick = () => {
     if (isFalling) {
       setIsFalling(false); // Останавливаем падение
-      setCurrentY((prevY) => Math.max(prevY - 120, -250)); // Поднимаем птицу на 120 пикселей
+      setCurrentY((prevY) => Math.max(prevY - 100, -250)); // Поднимаем птицу на 100 пикселей
 
       // Возобновляем падение через небольшую задержку
       setTimeout(() => {
@@ -148,9 +179,8 @@ function Game() {
 
   return (
     <>
-    {gameOver ? <div>Game Over</div> : 
-    <div>
     <div className='clickable-div' onClick={handleBackgroundClick}></div>
+      <Counter point={point}></Counter>
       <div className='background'>
         <div className='background-layer background-layer-1'/>
         <div className='background-layer background-layer-2'/>
@@ -158,8 +188,7 @@ function Game() {
         {isThere && <Pipe ref={refTwice} position_pipe_container={pipePositionTwice}></Pipe>} 
         {isThereTwice && <Pipe ref={refThird} position_pipe_container={pipePositionThird}></Pipe>} 
       </div>
-      <Bird ref={birdRef} isFalling={isFalling} currentY={currentY} />      
-    </div>}
+      <Bird ref={birdRef} isFalling={isFalling} currentY={currentY} />   
 
     </>
   );

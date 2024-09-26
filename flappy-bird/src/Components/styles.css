@@ -7,6 +7,23 @@
   overflow: hidden; /* Скрываем лишнее содержимое */
 }
 
+.point-container {
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  font-size: 30px;
+  top: 50px;
+  font-family: 'arcade';
+}
+
+@font-face {
+  font-family: 'arcade'; /* Название шрифта */
+  src: url('../assets/ARCADECLASSIC.TTF') format('truetype'); /* Добавьте другие форматы по необходимости */
+  font-weight: normal; /* Укажите начертание */
+  font-style: normal; /* Укажите стиль */
+}
+
 .background-layer {
   position: absolute;
   top: 0;
@@ -77,5 +94,5 @@
   left: 0;
   width: 100vw; /* Занимает всю ширину родительского элемента */
   height: 100vh; /* Занимает всю высоту родительского элемента */
-  z-index: 3;
+  z-index: 6;
 }
