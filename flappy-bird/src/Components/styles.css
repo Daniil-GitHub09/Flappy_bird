@@ -7,6 +7,54 @@
   overflow: hidden; /* Скрываем лишнее содержимое */
 }
 
+.death-screen {
+  width: 100vw; /* Занимаем всю ширину экрана */
+  height: 100vh; /* Занимаем всю высоту экрана */
+  position: absolute;
+  background-repeat: repeat-x;
+  background-size: contain;
+  top: 0;
+  background-image: url('./background.png');
+  filter: brightness(60%); /* Уменьшение яркости изображения */
+}
+
+.arise {
+  position: absolute;
+  top: 50%;
+  left: 42%;
+  font-size: 25px;
+  border-radius: 50px;
+  font-family: 'arcade';
+}
+
+.store-page {
+  width: 100vw; /* Занимаем всю ширину экрана */
+  height: 100vh; /* Занимаем всю высоту экрана */
+  position: absolute;
+  background-repeat: repeat-x;
+  background-size: contain;
+  top: 0;
+  background-image: url('./background.png');
+}
+
+.exit {
+  position: absolute;
+  top: 56%;
+  left: 43.5%;
+  font-size: 25px;
+  border-radius: 50px;
+  font-family: 'arcade';
+}
+
+.store {
+  position: absolute;
+  top: 62%;
+  left: 42.5%;
+  font-size: 25px;
+  border-radius: 50px;
+  font-family: 'arcade';
+}
+
 .point-container {
   position: absolute;
   justify-content: center;
@@ -42,6 +90,10 @@
   to {
     transform: translateX(-50%); /* Перемещаем влево на половину ширины */
   }
+}
+
+.score-zone {
+  width: 10px;
 }
 
 .background-layer-1 {

@@ -14,7 +14,7 @@ const Pipe = forwardRef(({ position_pipe_container }, ref) => {
       </div>
 
       {/* Зазор между трубами */}
-      <div ref={el => ref.current[3] = el} className='score-zone' style={{ width: `1px`, height: `${gap_height}px`, transform: `translateY(${position_pipe_container}px)` }} />
+      <div ref={el => ref.current[3] = el} className='score-zone' style={{height: `${gap_height}px`, transform: `translateY(${position_pipe_container}px)` }} />
 
       {/* Нижняя труба */}
       <div ref={el => ref.current[2] = el} className='pipe-collider second' style={{ width: `${pipe_width}px`, height: `${pipe_height}px`, transform: `translateY(${position_pipe_container}px)` }}>
