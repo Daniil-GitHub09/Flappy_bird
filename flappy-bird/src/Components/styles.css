@@ -27,6 +27,32 @@
   font-family: 'arcade';
 }
 
+.app-title {
+  font-family: 'arcade';
+  color: white;
+}
+
+.start {
+  font-size: large;
+  font-size: 25px;
+  border-radius: 50px;
+  font-family: 'arcade';
+}
+
+.home-page {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw; /* Занимаем всю ширину экрана */
+  height: 100vh; /* Занимаем всю высоту экрана */
+  position: absolute;
+  background-repeat: repeat-x;
+  background-size: contain;
+  top: 0;
+  background-image: url('./background.png');
+}
+
 .store-page {
   width: 100vw; /* Занимаем всю ширину экрана */
   height: 100vh; /* Занимаем всю высоту экрана */
@@ -62,16 +88,20 @@
   filter: brightness(75%);
 }
 
+.hide {
+  opacity: 1;
+}
+
 .skins {
   position: absolute;
-  top: 50%;
-  left: 43%;
+  top: 30%;
+  left: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.first-product {
+.product {
   font-family: 'arcade';
   display: flex;
   justify-content: center;
@@ -80,6 +110,12 @@
   flex-direction: column;
   width: 100px;
   height: 200px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+  padding: 5px;
+  margin-right: 7px;
+  background-color: white;
 }
 
 .exit {

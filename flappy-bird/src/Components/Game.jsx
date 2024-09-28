@@ -4,6 +4,7 @@ import './styles.css';
 import Pipe from './Pipe';
 import Counter from './Counter';
 import { useNavigate } from 'react-router-dom';
+import { useBird } from './BirdContext';
 
 function Game() {
   const [isFalling, setIsFalling] = useState(true);
@@ -16,6 +17,9 @@ function Game() {
   const [gameOver, setGameOver] = useState(false);
   const [point, setPoint] = useState(0);
   const [doubleClick, setDoubleClick] = useState(false);
+
+  const {isBought} = useBird()
+  const {countHeart, setCountHeart} = useBird()
 
   const navigate = useNavigate()
 
@@ -176,6 +180,8 @@ function Game() {
      setIsThereTwice(false);
      setGameOver(false);
 
+     setCountHeart((prev) => prev - 1)
+
      setDoubleClick(true);
 
      for (let i = 0; i < hasPassedPipe.current.length; i++) {
@@ -192,8 +198,37 @@ function Game() {
      }, 1800);
    };
 
-   // Обновление страницы
-   const refreshPage = () => window.location.reload();
+     // Функция для сброса состояния игры
+  const resetGame = () => {
+    setIsFalling(true);
+    setCurrentY(0);
+    setIsThere(false);
+    setIsThereTwice(false);
+    setPipePosition(0);
+    setPipePositionTwice(0);
+    setPipePositionThird(0);
+    setGameOver(false);
+    setPoint(0);
+    doubleClick && setDoubleClick(false);
+
+    // Сбрасываем статус прохождения труб
+    hasPassedPipe.current.fill(false);
+
+    // Запускаем таймеры для появления труб
+    startPipes();
+  };
+
+  // Запуск таймеров для появления труб
+  const startPipes = () => {
+    setTimeout(() => {
+      setIsThere(true); 
+    }, 900);
+
+    setTimeout(() => {
+      setIsThereTwice(true); 
+    }, 1800);
+  };
+
 
    const store = () => navigate('/store')
 
@@ -201,18 +236,26 @@ function Game() {
      <>
        {gameOver ?     
          <>
+        <div className='heart-container'>
+            <h1 className='count-of-heart'>{countHeart}</h1>
+          <img className='heart-img' src="./heartimg.png" alt="heart" />
+        </div>
            <div className='point-container'>
              <h1 className='point'>{point}</h1>      
            </div>
            <div className='death-screen'>
              {doubleClick ? <div></div> :
               <button className='arise' onClick={handleAriseClick}>Arise</button>}
-              <button className='exit' onClick={refreshPage}>Exit</button>
+              <button className='exit' onClick={resetGame}>Exit</button>
               <button className='store' onClick={store}>Store</button>
            </div>
          </> : 
          <div>
            <div className='clickable-div' onClick={handleBackgroundClick}></div>
+           <div className='heart-container'>
+            <h1 className='count-of-heart'>{countHeart}</h1>
+          <img className='heart-img' src="./heartimg.png" alt="heart" />
+        </div>
            <Counter point={point}></Counter>
            <div className='background'>
              <div className='background-layer background-layer-1'/>
@@ -221,7 +264,7 @@ function Game() {
              {isThere && <Pipe ref={refTwice} position_pipe_container={pipePositionTwice}></Pipe>} 
              {isThereTwice && <Pipe ref={refThird} position_pipe_container={pipePositionThird}></Pipe>} 
            </div>
-           <Bird ref={birdRef} currentY={currentY} isFalling={isFalling} />      
+           <Bird ref={birdRef} currentY={currentY} isFalling={isFalling} isBought={isBought} />      
          </div>}
      </>
    );

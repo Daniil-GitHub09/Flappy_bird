@@ -3,3 +3,20 @@
   justify-content: center;
   margin-top: 50%;
 }
+
+.heart-container {
+  position: absolute;
+  top: 5px;
+  left: 85%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}
+
+.count-of-heart {
+  font-family: 'arcade';
+}
+
+.heart-img {
+  width: 35px;
+}

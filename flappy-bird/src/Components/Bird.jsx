@@ -1,20 +1,12 @@
 import React, { useEffect, useState, forwardRef } from 'react';
 import { useSpring, animated } from '@react-spring/web';
+import { useBird } from './BirdContext'; // Импортируем контекст
 
-const images = [
-  './bird1.png',
-  './bird2.png',
-  './bird3.png',
-];
-
-const red_images = [
-  './redbird1.png',
-  './redbird2.png',
-  './redbird3.png',
-]
-
-const Bird = forwardRef(({ isFalling, currentY, isBought }, ref) => {
+const Bird = forwardRef(({ isFalling, currentY }, ref) => {
+  const { bought, number } = useBird(); // Извлекаем данные из контекста
   const [imageIndex, setImageIndex] = useState(0);
+
+  const imagesToUse = bought[number] || []; // Получаем массив изображений в зависимости от number
 
   const props = useSpring({
     to: {
@@ -26,21 +18,21 @@ const Bird = forwardRef(({ isFalling, currentY, isBought }, ref) => {
   useEffect(() => {
     if (!isFalling) {
       setImageIndex(1);
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setImageIndex(2);
       }, 90);
+      return () => clearTimeout(timer);
     } else {
       setImageIndex(0);
     }
   }, [isFalling]);
 
   return (
-    <>
-      <animated.div ref={ref} style={props} className='player'>
-        {isBought ? <img src={red_images[imageIndex]} alt="bird" className='bird' /> : <img src={images[imageIndex]} alt="bird" className='bird' />}
-      </animated.div>  
-    </>
-
+    <animated.div ref={ref} style={props} className='player'>
+      {imagesToUse.length > 0 && (
+        <img src={imagesToUse[imageIndex]} alt="bird" className='bird' />
+      )}
+    </animated.div>
   );
 });
 
