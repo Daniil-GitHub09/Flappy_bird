@@ -37,6 +37,51 @@
   background-image: url('./background.png');
 }
 
+.bird-image {
+  width: 50%;
+}
+
+.back {
+  margin-left: 5px;
+  margin-top: 5px;
+  font-size: 20px;
+  border-radius: 50px;
+  font-family: 'arcade';
+}
+
+.buy {
+  font-size: 25px;
+  border-radius: 50px;
+  font-family: 'arcade';
+}
+
+.bought {
+  font-size: 25px;
+  border-radius: 50px;
+  font-family: 'arcade';
+  filter: brightness(75%);
+}
+
+.skins {
+  position: absolute;
+  top: 50%;
+  left: 43%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.first-product {
+  font-family: 'arcade';
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100px;
+  height: 200px;
+}
+
 .exit {
   position: absolute;
   top: 56%;

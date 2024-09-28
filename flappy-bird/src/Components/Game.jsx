@@ -206,9 +206,9 @@ function Game() {
            </div>
            <div className='death-screen'>
              {doubleClick ? <div></div> :
-               <button className='arise' onClick={handleAriseClick}>Arise</button>}
-             <button className='exit' onClick={refreshPage}>Exit</button>
-             <button className='store' onClick={store}>Store</button>
+              <button className='arise' onClick={handleAriseClick}>Arise</button>}
+              <button className='exit' onClick={refreshPage}>Exit</button>
+              <button className='store' onClick={store}>Store</button>
            </div>
          </> : 
          <div>
@@ -221,7 +221,7 @@ function Game() {
              {isThere && <Pipe ref={refTwice} position_pipe_container={pipePositionTwice}></Pipe>} 
              {isThereTwice && <Pipe ref={refThird} position_pipe_container={pipePositionThird}></Pipe>} 
            </div>
-           <Bird ref={birdRef} isFalling={isFalling} currentY={currentY} />      
+           <Bird ref={birdRef} currentY={currentY} isFalling={isFalling} />      
          </div>}
      </>
    );

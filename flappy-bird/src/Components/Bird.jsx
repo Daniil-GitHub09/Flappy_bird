@@ -7,7 +7,13 @@ const images = [
   './bird3.png',
 ];
 
-const Bird = forwardRef(({ isFalling, currentY }, ref) => {
+const red_images = [
+  './redbird1.png',
+  './redbird2.png',
+  './redbird3.png',
+]
+
+const Bird = forwardRef(({ isFalling, currentY, isBought }, ref) => {
   const [imageIndex, setImageIndex] = useState(0);
 
   const props = useSpring({
@@ -29,9 +35,12 @@ const Bird = forwardRef(({ isFalling, currentY }, ref) => {
   }, [isFalling]);
 
   return (
-    <animated.div ref={ref} style={props} className='player'>
-      <img src={images[imageIndex]} alt="bird" className='bird' />
-    </animated.div>
+    <>
+      <animated.div ref={ref} style={props} className='player'>
+        {isBought ? <img src={red_images[imageIndex]} alt="bird" className='bird' /> : <img src={images[imageIndex]} alt="bird" className='bird' />}
+      </animated.div>  
+    </>
+
   );
 });
 
