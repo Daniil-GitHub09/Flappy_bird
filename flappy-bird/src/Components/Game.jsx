@@ -16,7 +16,6 @@ function Game() {
   const [pipePositionThird, setPipePositionThird] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [point, setPoint] = useState(0);
-  const [doubleClick, setDoubleClick] = useState(false);
 
   const {isBought} = useBird()
   const {countHeart, setCountHeart} = useBird()
@@ -118,7 +117,7 @@ function Game() {
       checkIfOutOfViewThird();
       checkCollision();
       getPoint();
-    }, 120);
+    }, 105);
 
     return () => clearInterval(intervalId);
   }, []);
@@ -182,8 +181,6 @@ function Game() {
 
      setCountHeart((prev) => prev - 1)
 
-     setDoubleClick(true);
-
      for (let i = 0; i < hasPassedPipe.current.length; i++) {
        hasPassedPipe.current[i] = false;
      }
@@ -209,7 +206,6 @@ function Game() {
     setPipePositionThird(0);
     setGameOver(false);
     setPoint(0);
-    doubleClick && setDoubleClick(false);
 
     // Сбрасываем статус прохождения труб
     hasPassedPipe.current.fill(false);
@@ -232,6 +228,8 @@ function Game() {
 
    const store = () => navigate('/store')
 
+   const { numberBackground } = useBird()
+
    return (
      <>
        {gameOver ?     
@@ -244,9 +242,10 @@ function Game() {
              <h1 className='point'>{point}</h1>      
            </div>
            <div className='death-screen'>
-             {doubleClick ? <div></div> :
+           <img src={numberBackground === 1 ? "./night.png" : './background.png'} alt='background' className='store-page'/>
+             {countHeart === 0 ? <div></div> :
               <button className='arise' onClick={handleAriseClick}>Arise</button>}
-              <button className='exit' onClick={resetGame}>Exit</button>
+              <button className='exit' onClick={resetGame}>Start</button>
               <button className='store' onClick={store}>Store</button>
            </div>
          </> : 
@@ -258,8 +257,11 @@ function Game() {
         </div>
            <Counter point={point}></Counter>
            <div className='background'>
-             <div className='background-layer background-layer-1'/>
-             <div className='background-layer background-layer-2'/>
+            {numberBackground === 0 ? <div> <div className='background-layer background-layer-1'/>
+             <div className='background-layer background-layer-2'/> </div> 
+              : <div> <div className='backgroundnight-layer background-layer-1'/>
+             <div className='backgroundnight-layer background-layer-2'/> </div>}
+
              <Pipe ref={ref} position_pipe_container={pipePosition}></Pipe>
              {isThere && <Pipe ref={refTwice} position_pipe_container={pipePositionTwice}></Pipe>} 
              {isThereTwice && <Pipe ref={refThird} position_pipe_container={pipePositionThird}></Pipe>} 

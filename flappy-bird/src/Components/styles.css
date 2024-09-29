@@ -14,7 +14,6 @@
   background-repeat: repeat-x;
   background-size: contain;
   top: 0;
-  background-image: url('./background.png');
   filter: brightness(60%); /* Уменьшение яркости изображения */
 }
 
@@ -37,6 +36,7 @@
   font-size: 25px;
   border-radius: 50px;
   font-family: 'arcade';
+  margin-bottom: 5px;
 }
 
 .home-page {
@@ -47,10 +47,7 @@
   width: 100vw; /* Занимаем всю ширину экрана */
   height: 100vh; /* Занимаем всю высоту экрана */
   position: absolute;
-  background-repeat: repeat-x;
-  background-size: contain;
   top: 0;
-  background-image: url('./background.png');
 }
 
 .store-page {
@@ -60,7 +57,7 @@
   background-repeat: repeat-x;
   background-size: contain;
   top: 0;
-  background-image: url('./background.png');
+  z-index: -1;
 }
 
 .bird-image {
@@ -73,6 +70,9 @@
   font-size: 20px;
   border-radius: 50px;
   font-family: 'arcade';
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .buy {
@@ -89,12 +89,12 @@
 }
 
 .hide {
-  opacity: 1;
+  z-index: -2;
 }
 
 .skins {
   position: absolute;
-  top: 30%;
+  top: 45%;
   left: 30%;
   display: flex;
   justify-content: center;
@@ -109,7 +109,7 @@
   align-items: center;
   flex-direction: column;
   width: 100px;
-  height: 200px;
+  height: 165px;
   border-style: solid;
   border-color: black;
   border-radius: 10px;
@@ -118,10 +118,15 @@
   background-color: white;
 }
 
+.sky {
+  height: 100px;
+  margin-bottom: 10px;
+}
+
 .exit {
   position: absolute;
   top: 56%;
-  left: 43.5%;
+  left: 42.5%;
   font-size: 25px;
   border-radius: 50px;
   font-family: 'arcade';
@@ -134,6 +139,32 @@
   font-size: 25px;
   border-radius: 50px;
   font-family: 'arcade';
+}
+
+.backgrounds {
+  position: absolute;
+  top: 13%;
+  left: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.background-skin{
+  font-family: 'arcade';
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100px;
+  height: 160px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+  padding: 5px;
+  margin-right: 7px;
+  background-color: white;
 }
 
 .point-container {
@@ -160,6 +191,54 @@
   width: 200%; /* Делаем шире для эффекта бесконечности */
   height: 100%;
   background-image: url('./background.png'); /* Путь к изображению */
+  background-repeat: repeat; /* Повторяем изображение по обеим осям */
+  background-size: contain; /* Используем contain для полного отображения изображения */
+}
+
+.heart-buy {
+  width: 30%;
+}
+
+.plus-text {
+  position: relative;
+  font-size: 22px;
+  top: -25%;
+  left: 3%;
+}
+
+.plus-one {
+  font-family: 'arcade';
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100px;
+  height: 100px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+  padding: 5px;
+  margin-right: 7px;
+  background-color: white;
+}
+
+.hearts {
+  position: absolute;
+  top: 77%;
+  left: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backgroundnight-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%; /* Делаем шире для эффекта бесконечности */
+  height: 100%;
+  background-image: url('./night.png'); /* Путь к изображению */
   background-repeat: repeat; /* Повторяем изображение по обеим осям */
   background-size: contain; /* Используем contain для полного отображения изображения */
 }

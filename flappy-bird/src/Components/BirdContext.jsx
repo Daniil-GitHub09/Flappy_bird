@@ -17,10 +17,11 @@ const red_images = [
 export const BirdProvider = ({ children }) => {
   const [bought, setBought] = useState([images, red_images]);
   const [number, setNumber] = useState(0);
+  const [numberBackground, setNumberBackground] = useState(0);
   const [countHeart, setCountHeart] = useState(1);
 
   return (
-    <BirdContext.Provider value={{ bought, setBought, number, setNumber, countHeart, setCountHeart}}>
+    <BirdContext.Provider value={{ bought, setBought, number, setNumber, countHeart, setCountHeart, numberBackground, setNumberBackground}}>
       {children}
     </BirdContext.Provider>
   );
